@@ -1,0 +1,14 @@
+{
+  "name": "istanbul-coverage-enforcer",
+  "version": "1.0.0",
+  "description": "A Nodejs package and cli tool to enforce code coverage",
+  "main": "index.js",
+  "repository": "https://github.com/addityasingh/istanbul-coverage-enforcer.git",
+  "author": "Aditya Pratap Singh <adisinghrajput@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "glob-fs": "^0.1.7",
+    "istanbul-threshold-checker": "^0.2.1"
+  }
+}
