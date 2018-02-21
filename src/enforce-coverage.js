@@ -11,11 +11,11 @@ const EACH = 'each';
 const collector = new istanbul.Collector();
 
 const generateCoverage = () => {
-    const { stdout, stderr } = exec(`npm run coverage`);
-}
+  const { stdout, stderr } = exec(`npm run coverage`);
+};
 
-const convertResultToThreshold = (result) => {
-    /*
+const convertResultToThreshold = result => {
+  /*
     Syntax of Result
     [{
         "type":"lines",
@@ -37,7 +37,7 @@ const convertResultToThreshold = (result) => {
     }]
     */
 
-    /*
+  /*
         Syntax of threshold
         {
             "global": {
@@ -54,56 +54,58 @@ const convertResultToThreshold = (result) => {
             }
         }
     */
-    
-    return result.reduce((acc, r) => {
-        const globals = Object.assign({}, acc.global, {
-            [r.type]: r.global.value
-        });
-        const each = Object.assign({}, acc.each, {
-            [r.type]: r.each.value
-        });
 
-        return Object.assign({}, acc, {
-            global: globals,
-            each,
-        });
-    }, { "global": {}, "each": {} });
-}
+  return result.reduce(
+    (acc, r) => {
+      const globals = Object.assign({}, acc.global, {
+        [r.type]: r.global.value,
+      });
+      const each = Object.assign({}, acc.each, {
+        [r.type]: r.each.value,
+      });
+
+      return Object.assign({}, acc, {
+        global: globals,
+        each,
+      });
+    },
+    { global: {}, each: {} }
+  );
+};
 
 /**
- * 
- * @param {object} results 
+ *
+ * @param {object} results
  * @param {string} thresholdType OneOf(GLOBAL, EACH)
  */
-const getCoverageStatus = (results) => 
-    [results, results.reduce((pass = true, current) =>
-        pass && !current[GLOBAL]['failed'])];
+const getCoverageStatus = results => [
+  results,
+  results.reduce((pass = true, current) => pass && !current[GLOBAL]['failed']),
+];
 
-const updateCoverageThreshold = (currentCoverage) => fs.writeFileSync(
-    'coverage-threshold.json', JSON.stringify(currentCoverage), { encoding: 'UTF-8' }
-);
+const updateCoverageThreshold = currentCoverage =>
+  fs.writeFileSync('coverage-threshold.json', JSON.stringify(currentCoverage), {
+    encoding: 'UTF-8',
+  });
 
 const checkAndUpdateCoverage = (results, pass) => {
-    if (!pass) {
-        process.nextTick(() => {
-            console.error('[ERROR]: Coverage threshold fails');
-            process.exit(1);
-        })
-    } else {
-        compose(
-            updateCoverageThreshold,
-            convertResultToThreshold,
-        )(results);
-    }
-}
+  if (!pass) {
+    process.nextTick(() => {
+      console.error('[ERROR]: Coverage threshold fails');
+      process.exit(1);
+    });
+  } else {
+    compose(updateCoverageThreshold, convertResultToThreshold)(results);
+  }
+};
 
 compose(
-    res => checkAndUpdateCoverage(...res),
-    getCoverageStatus,
-    checker.checkFailures.bind(null, coverageThreshold),
-    () => collector.getFinalCoverage(),
-    res => collector.add(res),
-    JSON.parse,
-    () => fs.readFileSync('./coverage/coverage.json', 'UTF8'),
-    generateCoverage,
+  res => checkAndUpdateCoverage(...res),
+  getCoverageStatus,
+  checker.checkFailures.bind(null, coverageThreshold),
+  () => collector.getFinalCoverage(),
+  res => collector.add(res),
+  JSON.parse,
+  () => fs.readFileSync('./coverage/coverage.json', 'UTF8'),
+  generateCoverage
 )();
