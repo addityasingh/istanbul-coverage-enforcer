@@ -8,13 +8,15 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "test": "jest",
     "format": "prettier --single-quote --trailing-comma es5 --write '{src,__{test,examples}__}/**/*.js'"
   },
   "dependencies": {
-    "glob-fs": "^0.1.7",
-    "istanbul-threshold-checker": "^0.2.1"
+    "glob-fs": "0.1.7",
+    "istanbul-threshold-checker": "0.2.1"
   },
   "devDependencies": {
+    "jest": "22.4.0",
     "prettier": "1.10.2"
   }
 }

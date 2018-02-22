@@ -1,12 +1,10 @@
-const coverageThreshold = require('./coverage-threshold.json');
 const istanbul = require('istanbul');
 const fs = require('fs');
 const { exec } = require('child_process');
 const checker = require('istanbul-threshold-checker');
-const { compose } = require('./functional-utils.js');
 
-const GLOBAL = 'global';
-const EACH = 'each';
+const { compose } = require('./functional-utils.js');
+const { GLOBAL } = require('./constants');
 
 const collector = new istanbul.Collector();
 
@@ -15,46 +13,6 @@ const generateCoverage = () => {
 };
 
 const convertResultToThreshold = result => {
-  /*
-    Syntax of Result
-    [{
-        "type":"lines",
-        "global":{"failed":false,"value":64.52},
-        "each":{"failed":true,"failures":["/Users/adisingh/Documents/dev/zalando/vegas/pdp-aggregator/src/worker/worker-client.js"]}
-    },
-    {
-        "type":"statements",
-        "global":{"failed":false,"value":64.52},
-        "each":{"failed":false,"failures":[]}
-    },{
-        "type":"functions",
-        "global":{"failed":false,"value":-2},
-        "each":{"failed":true,"failures":["/Users/adisingh/Documents/dev/zalando/vegas/pdp-aggregator/src/worker/worker-client.js"]}
-    },{
-        "type":"branches",
-        "global":{"failed":false,"value":50},
-        "each":{"failed":false,"failures":[]}
-    }]
-    */
-
-  /*
-        Syntax of threshold
-        {
-            "global": {
-                "statements": 65.5,
-                "branches": 50,
-                "lines": 64,
-                "functions": -10
-            },
-            "each": {
-                "statements": 0,
-                "branches": -20,
-                "lines": 60,
-                "functions": 100
-            }
-        }
-    */
-
   return result.reduce(
     (acc, r) => {
       const globals = Object.assign({}, acc.global, {
@@ -83,8 +41,8 @@ const getCoverageStatus = results => [
   results.reduce((pass = true, current) => pass && !current[GLOBAL]['failed']),
 ];
 
-const updateCoverageThreshold = currentCoverage =>
-  fs.writeFileSync('coverage-threshold.json', JSON.stringify(currentCoverage), {
+const updateCoverageThreshold = (currentCoverage, thresholdPath) =>
+  fs.writeFileSync(thresholdPath, JSON.stringify(currentCoverage), {
     encoding: 'UTF-8',
   });
 
@@ -99,13 +57,21 @@ const checkAndUpdateCoverage = (results, pass) => {
   }
 };
 
-compose(
+const readCoverageDetails = (coveragePath) => fs.readFileSync(coveragePath, 'UTF8');
+const readThresholdDetails = (thresholdPath) => fs.readFileSync(thresholdPath, 'UTF8');
+
+const enforce = (coveragePath, thresholdPath) => compose(
   res => checkAndUpdateCoverage(...res),
   getCoverageStatus,
-  checker.checkFailures.bind(null, coverageThreshold),
+  checker.checkFailures.bind(null, readThresholdDetails(thresholdPath)),
   () => collector.getFinalCoverage(),
   res => collector.add(res),
   JSON.parse,
-  () => fs.readFileSync('./coverage/coverage.json', 'UTF8'),
+  () => readCoverageDetails(coveragePath),
   generateCoverage
-)();
+);
+
+exports.enforce = enforce;
+module.exports = {
+  convertResultToThreshold,
+};
