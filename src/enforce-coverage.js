@@ -1,16 +1,11 @@
 const istanbul = require('istanbul');
 const fs = require('fs');
-const { exec } = require('child_process');
 const checker = require('istanbul-threshold-checker');
 
-const { compose } = require('./functional-utils.js');
+const { compose, readParsedJSONP } = require('./utils.js');
 const { GLOBAL } = require('./constants');
 
 const collector = new istanbul.Collector();
-
-const generateCoverage = () => {
-  const { stdout, stderr } = exec(`npm run coverage`);
-};
 
 const convertResultToThreshold = result => {
   return result.reduce(
@@ -36,42 +31,41 @@ const convertResultToThreshold = result => {
  * @param {object} results
  * @param {string} thresholdType OneOf(GLOBAL, EACH)
  */
-const getCoverageStatus = results => [
-  results,
-  results.reduce((pass = true, current) => pass && !current[GLOBAL]['failed']),
-];
+const isCoverageFailed = results =>
+  results.reduce((fail, current) => fail || current[GLOBAL]['failed'], false);
 
-const updateCoverageThreshold = (currentCoverage, thresholdPath) =>
+const updateCoverageThreshold = (thresholdPath, currentCoverage) => {
   fs.writeFileSync(thresholdPath, JSON.stringify(currentCoverage), {
     encoding: 'UTF-8',
   });
+  return currentCoverage;
+};
 
-const checkAndUpdateCoverage = (results, pass) => {
-  if (!pass) {
-    process.nextTick(() => {
-      console.error('[ERROR]: Coverage threshold fails');
-      process.exit(1);
-    });
+const checkCoverage = results => {
+  if (isCoverageFailed(results)) {
+    throw new Error('[ERROR]: Coverage threshold fails');
   } else {
-    compose(updateCoverageThreshold, convertResultToThreshold)(results);
+    return results;
   }
 };
 
-const readCoverageDetails = (coveragePath) => fs.readFileSync(coveragePath, 'UTF8');
-const readThresholdDetails = (thresholdPath) => fs.readFileSync(thresholdPath, 'UTF8');
+const enforce = (coveragePath, thresholdPath) => {
+  const coverageDetails = readParsedJSONP(coveragePath, { encoding: 'utf-8' });
+  const thresholdDetails = readParsedJSONP(thresholdPath, {
+    encoding: 'utf-8',
+  });
 
-const enforce = (coveragePath, thresholdPath) => compose(
-  res => checkAndUpdateCoverage(...res),
-  getCoverageStatus,
-  checker.checkFailures.bind(null, readThresholdDetails(thresholdPath)),
-  () => collector.getFinalCoverage(),
-  res => collector.add(res),
-  JSON.parse,
-  () => readCoverageDetails(coveragePath),
-  generateCoverage
-);
+  return compose(
+    updateCoverageThreshold.bind(null, thresholdPath),
+    convertResultToThreshold,
+    checkCoverage,
+    checker.checkFailures.bind(null, thresholdDetails),
+    () => collector.getFinalCoverage(),
+    res => collector.add(res)
+  )(coverageDetails);
+};
 
-exports.enforce = enforce;
 module.exports = {
+  enforce,
   convertResultToThreshold,
 };

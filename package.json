@@ -8,14 +8,22 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "jest",
-    "format": "prettier --single-quote --trailing-comma es5 --write '{src,__{test,examples}__}/**/*.js'"
+    "codecov": "cat coverage/*/lcov.info | codecov",
+    "cover": "jest --coverage",
+    "format": "prettier --single-quote --trailing-comma es5 --write '{src,__{examples}__}/**/*.js'",
+    "test": "jest"
   },
   "dependencies": {
     "glob-fs": "0.1.7",
     "istanbul-threshold-checker": "0.2.1"
   },
+  "keywords": [
+    "node",
+    "istanbul",
+    "code-coverage"
+  ],
   "devDependencies": {
+    "codecov": "3.0.0",
     "jest": "22.4.0",
     "prettier": "1.10.2"
   }
