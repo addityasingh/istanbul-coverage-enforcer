@@ -14,7 +14,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "glob-fs": "0.1.7",
     "istanbul-threshold-checker": "0.2.1"
   },
   "keywords": [
