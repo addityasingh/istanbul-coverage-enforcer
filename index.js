@@ -1,12 +1,13 @@
-// const enforce = require('./src/enforce-coverage');
+const { enforce } = require('./src/enforce-coverage');
 
 // Accept input threshold file path
 // Accept input coverage file path
 // execute enforce and return result
 // E.g. node index.js --coverage-path="./coverage.json" --threshold-path="threshold.json"
 
-const regex = /^--coverage-path="[a-zA-Z]"$/i
-process.argv.slice(2).forEach((val, index) => {
-    console.log(`${index}: ${val}`);
-    console.log(regex.exec(val));
-});
+/**
+ * Enforce coverage based on threshold, or fail the process
+ * @param {*} coveragePath The path of coverage file
+ * @param {*} thresholdPath  The path to the coverage threshold file
+ */
+module.exports = enforce;
