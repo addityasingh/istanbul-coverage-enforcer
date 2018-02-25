@@ -12,11 +12,10 @@ A Nodejs package and cli tool to enforce code coverage
 [![version](https://img.shields.io/npm/v/istanbul-coverage-enforcer.svg)](https://npmjs.org/package/istanbul-coverage-enforcer)
 
 
-### The problem
-Most of the coverage tools available do not provide an option to enforce the coverage and stop the build in case the coverage threshold is not met
+### Why?
+Most of the coverage tools available do not provide an option to enforce the coverage and flag exception in case the coverage threshold is not met. This is one of the very frequently faced use cases I came across for most applications I work along with other team members. Due to struct deadlines we tend to miss out on tests and manually enforcing the test coverage to be maintained is not a scalable option.
 
-### Solution: 
-A small node package to enforce coverage as based on threshold
+This package solves the issue of manually maintaning the code coverage above a given threshold
 
 # Installation
 Use it with `npm` as
@@ -32,7 +31,7 @@ yarn add istanbul-coverage-enforcer
 ```
 
 # Prerequisite
-istanbul stable (`0.4.5` or below) is needed to get the correct format of the `coverage.json`
+istanbul stable (`0.4.5` or below) is needed to get the [required interface](http://gotwarlost.github.io/istanbul/public/apidocs/classes/Istanbul.html) of the `coverage.json` file
 
 # Usage
 You can use the istanbul-coverage-enforcer both as a node package and as a CLI tool
@@ -81,3 +80,4 @@ enforce('./examples/packages/coverage.json', './examples/packages/coverage-thres
 Refer the [examples](https://github.com/addityasingh/istanbul-coverage-enforcer/tree/master/examples) folder for basic use case examples as node package and cli
 
 # Reference and Credits
+[istanbul-threshold-checker](https://github.com/peterjwest/istanbul-threshold-checker) for getting the grunt work to compare and generate the result
