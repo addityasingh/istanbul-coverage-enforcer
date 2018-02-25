@@ -49,7 +49,7 @@ const checkCoverage = results => {
   }
 };
 
-const enforce = (coveragePath, thresholdPath) => {
+const enforce = (coveragePath, thresholdPath = 'coverage-threshold.json') => {
   const coverageDetails = readParsedJSONP(coveragePath, { encoding: 'utf-8' });
   const thresholdDetails = readParsedJSONP(thresholdPath, {
     encoding: 'utf-8',

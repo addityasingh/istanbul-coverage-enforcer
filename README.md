@@ -31,12 +31,53 @@ or with yarn as
 yarn add istanbul-coverage-enforcer
 ```
 
-# API
+# Prerequisite
+istanbul stable (`0.4.5` or below) is needed to get the correct format of the `coverage.json`
 
-# Examples
+# Usage
 You can use the istanbul-coverage-enforcer both as a node package and as a CLI tool
-- Usage as a CLI tool
-- Usage as a node package
-refer the `examples`folder for some basic use case examples
+
+#### As a CLI tool:
+These are the options available currently with the CLI tool
+
+```
+enforce --help
+
+  Usage: enforce [options]
+
+
+  Options:
+
+    -c, --coverage-path   The path to coverage JSON file
+    -t, --threshold-path  The path to the threshold JSON file
+    -h, --help            output usage information
+```
+
+1. Add a npm script in `package.json` to call the package with the path to the code-coverage file. By default this is at `coverage/coverage.json` 
+
+```javascript
+"enforce-coverage": "enforce -c=coverage/coverage.json -t=coverage-threshold.json",
+```
+
+2. Now you can run this script as part of your build to ensure that code coverage is maintained above threshold
+```
+npm run enforce-covergage
+```
+***Output***
+```bash
+[SUCCESS]: Coverage above threshold
+```
+
+#### As a node package
+1. Create a `coverage-threshold.json` in the root of your project. Optionally this can be also passed as the second parameter to the function
+
+2. In your script *import* and *call* the `enforce` function as below:
+```
+const enforce = require('../index');
+
+enforce('./examples/coverage.json', './examples/coverage-threshold.json');
+```
+
+Refer the `examples`folder for some basic use case examples
 
 # Reference and Credits
