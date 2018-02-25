@@ -11,6 +11,7 @@
     "codecov": "cat coverage/*/lcov.info | codecov",
     "cover": "jest --coverage",
     "format": "prettier --single-quote --trailing-comma es5 --write '{src,__{examples}__}/**/*.js'",
+    "patch-release": "npm version patch && npm publish && git push --follow-tags",
     "test": "jest"
   },
   "dependencies": {
@@ -30,5 +31,7 @@
     "prettier": "1.10.2"
   },
   "preferGlobal": true,
-  "bin": "./enforce.js"
+  "bin": {
+    "enforce": "./enforce.js"
+  }
 }
