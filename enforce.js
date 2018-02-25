@@ -21,6 +21,7 @@ try {
     console.log(`[SUCCESS]: Coverage above threshold`.green);
 } catch (e) {
     console.log(`${e.message}`.red)
+    process.exitCode = 1;
 } finally {
     const { global: thresholdGlobal = {} } = readParsedJSON(program.thresholdPath)
     console.log(`
