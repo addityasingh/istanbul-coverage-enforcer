@@ -1,2 +1,5 @@
 coverage
 yarn-error.log
+examples
+
+**/*.spec.js
