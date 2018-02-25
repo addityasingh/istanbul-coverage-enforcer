@@ -78,6 +78,6 @@ const enforce = require('../index');
 enforce('./examples/coverage.json', './examples/coverage-threshold.json');
 ```
 
-Refer the `examples`folder for basic use case examples as node package and cli
+Refer the [examples](https://github.com/addityasingh/istanbul-coverage-enforcer/tree/master/examples) folder for basic use case examples as node package and cli
 
 # Reference and Credits
