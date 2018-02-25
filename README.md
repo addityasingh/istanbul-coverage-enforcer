@@ -56,7 +56,7 @@ enforce --help
 1. Add a npm script in `package.json` to call the package with the path to the code-coverage file. By default this is at `coverage/coverage.json` 
 
 ```javascript
-"enforce-coverage": "enforce -c=coverage/coverage.json -t=coverage-threshold.json",
+"enforce-coverage": "enforce -c coverage/coverage.json -t coverage-threshold.json",
 ```
 
 2. Now you can run this script as part of your build to ensure that code coverage is maintained above threshold
@@ -75,7 +75,7 @@ npm run enforce-covergage
 ```
 const enforce = require('../index');
 
-enforce('./examples/coverage.json', './examples/coverage-threshold.json');
+enforce('./examples/packages/coverage.json', './examples/packages/coverage-threshold.json');
 ```
 
 Refer the [examples](https://github.com/addityasingh/istanbul-coverage-enforcer/tree/master/examples) folder for basic use case examples as node package and cli
