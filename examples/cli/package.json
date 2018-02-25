@@ -1,0 +1,15 @@
+{
+  "name": "istanbul-coverage-enforcer-cli",
+  "version": "1.0.0",
+  "description": "Example to show cli for istanbul-coverage-enforcer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "enforce-coverage": "node_modules/istanbul-coverage-enforcer/enforce.js enforce --coverage-path='coverage.json' --threshold-path='coverage-threshold.json'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "istanbul-coverage-enforcer": "^1.0.2"
+  }
+}
