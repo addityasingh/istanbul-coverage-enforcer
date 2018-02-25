@@ -1,6 +1,6 @@
 {
   "name": "istanbul-coverage-enforcer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A Nodejs package and cli tool to enforce code coverage",
   "main": "index.js",
   "repository": "https://github.com/addityasingh/istanbul-coverage-enforcer.git",
