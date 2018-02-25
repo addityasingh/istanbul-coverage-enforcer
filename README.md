@@ -1,5 +1,5 @@
 # istanbul-coverage-enforcer
-A Nodejs package and cli tool to enforce code coverage
+A Nodejs package and cli tool to enforce global code coverage
 
 [![NPM](https://nodei.co/npm/istanbul-coverage-enforcer.png)](https://npmjs.org/package/istanbul-coverage-enforcer)
 
@@ -15,7 +15,7 @@ A Nodejs package and cli tool to enforce code coverage
 ### Why?
 Most of the coverage tools available do not provide an option to enforce the coverage and flag exception in case the coverage threshold is not met. This is one of the very frequently faced use cases I came across for most applications I work along with other team members. Due to struct deadlines we tend to miss out on tests and manually enforcing the test coverage to be maintained is not a scalable option.
 
-This package solves the issue of manually maintaning the code coverage above a given threshold
+This package solves the issue of manually maintaning the global code coverage above a given threshold
 
 # Installation
 Use it with `npm` as

@@ -1,3 +1,3 @@
-const enforce = require('../index');
+const enforce = require('../../index');
 
-enforce('./examples/coverage.json', './examples/coverage-threshold.json');
+enforce('coverage.json', 'coverage-threshold.json');

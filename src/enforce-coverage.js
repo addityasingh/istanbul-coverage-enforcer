@@ -2,7 +2,7 @@ const istanbul = require('istanbul');
 const fs = require('fs');
 const checker = require('istanbul-threshold-checker');
 
-const { compose, readParsedJSONP } = require('./utils.js');
+const { compose, readParsedJSON } = require('./utils.js');
 const { GLOBAL } = require('./constants');
 
 const collector = new istanbul.Collector();
@@ -50,8 +50,8 @@ const checkCoverage = results => {
 };
 
 const enforce = (coveragePath, thresholdPath = 'coverage-threshold.json') => {
-  const coverageDetails = readParsedJSONP(coveragePath, { encoding: 'utf-8' });
-  const thresholdDetails = readParsedJSONP(thresholdPath, {
+  const coverageDetails = readParsedJSON(coveragePath, { encoding: 'utf-8' });
+  const thresholdDetails = readParsedJSON(thresholdPath, {
     encoding: 'utf-8',
   });
 

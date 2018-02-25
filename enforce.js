@@ -2,6 +2,7 @@
 
 const program = require('commander');
 const colors = require('colors');
+const { readParsedJSON } = require('./src/utils');
 const { enforce } = require('./src/enforce-coverage');
 
 program
@@ -20,4 +21,15 @@ try {
     console.log(`[SUCCESS]: Coverage above threshold`.green);
 } catch (e) {
     console.log(`${e.message}`.red)
+} finally {
+    const { global: thresholdGlobal = {} } = readParsedJSON(program.thresholdPath)
+    console.log(`
+=============================== Coverage thresholds ===============================
+Statements : ${thresholdGlobal.statements}%
+Branches : ${thresholdGlobal.branches}%
+Functions : ${thresholdGlobal.functions}%
+Lines : ${thresholdGlobal.lines}%
+================================================================================
+    `.yellow);
 }
+

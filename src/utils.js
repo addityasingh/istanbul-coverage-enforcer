@@ -5,9 +5,9 @@ const pipe = (fn, ...fns) => (...args) =>
 
 const compose = (...fns) => pipe(...fns.reverse());
 
-const readParsedJSONP = compose(JSON.parse, readFileSync);
+const readParsedJSON = compose(JSON.parse, readFileSync);
 
 module.exports = {
   compose,
-  readParsedJSONP,
+  readParsedJSON,
 };
