@@ -64,9 +64,8 @@ enforce --help
 npm run enforce-covergage
 ```
 ***Output***
-```bash
-[SUCCESS]: Coverage above threshold
-```
+![istanbul-enforce-success](https://raw.githubusercontent.com/additysingh/istanbul-coverage-enforcer/master/examples/cli/images/istanbul-enforce-success.png)
+![istanbul-enforce-failure](https://raw.githubusercontent.com/additysingh/istanbul-coverage-enforcer/master/examples/cli/images/istanbul-enforce-failure.png)
 
 #### As a node package
 1. Create a `coverage-threshold.json` in the root of your project. Optionally this can be also passed as the second parameter to the function
@@ -78,6 +77,6 @@ const enforce = require('../index');
 enforce('./examples/coverage.json', './examples/coverage-threshold.json');
 ```
 
-Refer the `examples`folder for some basic use case examples
+Refer the `examples`folder for basic use case examples as node package and cli
 
 # Reference and Credits
