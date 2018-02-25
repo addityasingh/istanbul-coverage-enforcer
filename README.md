@@ -33,10 +33,19 @@ yarn add istanbul-coverage-enforcer
 
 # API
 
-# Examples
+# Prerequisite
+istanbul stable (`0.4.5` or below) is needed to get the correct format of the `coverage.json`
+
+# Usage
 You can use the istanbul-coverage-enforcer both as a node package and as a CLI tool
-- Usage as a CLI tool
-- Usage as a node package
+- As a CLI tool
+- As a node package
+1. Create a `coverage-threshold.json` in the root of your project
+2. Add a npm script in `package.json` to call the package with the path to the code-coverage file. By default this is at `coverage/coverage.json` 
+
+```javascript
+"enforce-coverage": "node_modules/istanbul-coverage-enforcer coverage/coverage.json",
+```
 refer the `examples`folder for some basic use case examples
 
 # Reference and Credits
