@@ -156,9 +156,9 @@ isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
 
-istanbul-coverage-enforcer@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/istanbul-coverage-enforcer/-/istanbul-coverage-enforcer-1.0.2.tgz#101f40b493e3cca7309d52a12f46e40797758909"
+istanbul-coverage-enforcer@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/istanbul-coverage-enforcer/-/istanbul-coverage-enforcer-1.0.4.tgz#aa2addb2838110ec68b27ec91fe1f8fd0ab84a18"
   dependencies:
     colors "^1.1.2"
     commander "2.14.1"
