@@ -8,7 +8,7 @@ const mockCoverageResult = [
     each: {
       failed: true,
       failures: [
-        '/Users/adisingh/Documents/dev/zalando/vegas/pdp-aggregator/src/worker/worker-client.js',
+        'func-util.js',
       ],
     },
   },
@@ -32,7 +32,7 @@ const mockCoverageResult = [
     each: {
       failed: true,
       failures: [
-        '/Users/adisingh/Documents/dev/zalando/vegas/pdp-aggregator/src/worker/worker-client.js',
+        'func-util.js',
       ],
     },
   },
@@ -50,9 +50,9 @@ const mockCoverageResult = [
 ];
 
 const mockCoverage = {
-  '/Users/adisingh/Documents/dev/zalando/vegas/pdp-aggregator/src/worker/worker-client.js': {
+  'func-util.js': {
     path:
-      '/Users/adisingh/Documents/dev/zalando/vegas/pdp-aggregator/src/worker/worker-client.js',
+      'func-util.js',
     s: {
       '1': 1,
       '2': 0,
@@ -72,7 +72,7 @@ const mockCoverage = {
     },
     fnMap: {
       '1': {
-        name: 'sendMetric',
+        name: 'fnA',
         line: 1,
         loc: {
           start: {
@@ -86,7 +86,7 @@ const mockCoverage = {
         },
       },
       '2': {
-        name: 'sendLog',
+        name: 'fnB',
         line: 10,
         loc: {
           start: {
@@ -227,9 +227,9 @@ const mockCoverage = {
       },
     },
   },
-  '/Users/adisingh/Documents/dev/zalando/vegas/pdp-aggregator/src/support/deep-merge.js': {
+  'deep-merge.js': {
     path:
-      '/Users/adisingh/Documents/dev/zalando/vegas/pdp-aggregator/src/support/deep-merge.js',
+      'deep-merge.js',
     s: {
       '1': 1,
       '2': 8,
