@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { enforce, convertResultToThreshold } = require('./enforce-coverage');
+const { enforce, convertResultToThreshold } = require('../enforce-coverage');
 
 const {
   mockCoverage,
