@@ -9,10 +9,10 @@
   "private": false,
   "scripts": {
     "codecov": "cat coverage/*/lcov.info | codecov",
-    "cover": "jest --coverage",
+    "cover": "jest --coverage src/**/*.spec.js",
     "format": "prettier --single-quote --trailing-comma es5 --write '{src,__{examples}__}/**/*.js'",
     "patch-release": "npm version patch && npm publish && git push --follow-tags",
-    "test": "jest"
+    "test": "jest src/**/*.spec.js"
   },
   "dependencies": {
     "colors": "^1.1.2",
